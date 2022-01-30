@@ -11,29 +11,30 @@ public class Cannon : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float period = 1.1f;
 
-    private void FixedUpdate()
+    private void Start()
     {
-        this.transform.LookAt(Player.transform);
+        InvokeRepeating("FireCannon", 1f, 1f);
     }
     private void FireCannon()
     {
-        initvel = transform.forward * 10;
+
+        initvel = transform.forward * 75;
         GameObject cannonBall = Instantiate(cannonBallPrefab, fireloc.position, Quaternion.identity);
         Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
         rb.AddForce(initvel, ForceMode.Impulse);
     }
-    private void OnTriggerEnter(Collision other)
-    {
-        if(other.gameObject.tag == "HumanPlayer")
-        {
-            InvokeRepeating("FireCannon", 1f, 1f);
-        }
-    }
-    private void OnTriggerExit(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "HumanPlayer")
         {
             InvokeRepeating("FireCannon", 1f, 1f);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "HumanPlayer")
+        {
+            CancelInvoke("FireCannon");
         }
     }
 }
