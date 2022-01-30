@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour
     public bool canJump = false;
 
     //Inputs
-    KeyCode MoveForwards = KeyCode.W;
-    KeyCode MoveBackwards = KeyCode.W;
-    KeyCode MoveLeft = KeyCode.W;
-    KeyCode MoveRight = KeyCode.W;
-    KeyCode Jump = KeyCode.W;
+    public KeyCode MoveForwards = KeyCode.W;
+    public KeyCode MoveBackwards = KeyCode.S;
+    public KeyCode MoveLeft = KeyCode.A;
+    public KeyCode MoveRight = KeyCode.D;
+    public KeyCode Jump = KeyCode.Space;
+
 
     void Start()
     {

@@ -16,6 +16,10 @@ public class PlayerGrab : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public bool usemouse = true;
+    public KeyCode GrabLeft = KeyCode.None;
+    public KeyCode GrabRight = KeyCode.None;
+
     // Update is called once per frame
     void Update()
     {
