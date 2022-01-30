@@ -11,23 +11,29 @@ public class Cannon : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float period = 1.1f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void FixedUpdate()
     {
-        InvokeRepeating("FireCannon", 1f, 1f);
+        this.transform.LookAt(Player.transform);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void FireCannon()
     {
         initvel = transform.forward * 10;
         GameObject cannonBall = Instantiate(cannonBallPrefab, fireloc.position, Quaternion.identity);
         Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
         rb.AddForce(initvel, ForceMode.Impulse);
+    }
+    private void OnTriggerEnter(Collision other)
+    {
+        if(other.gameObject.tag == "HumanPlayer")
+        {
+            InvokeRepeating("FireCannon", 1f, 1f);
+        }
+    }
+    private void OnTriggerExit(Collision other)
+    {
+        if (other.gameObject.tag == "HumanPlayer")
+        {
+            InvokeRepeating("FireCannon", 1f, 1f);
+        }
     }
 }
